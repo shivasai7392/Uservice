@@ -1,6 +1,8 @@
 package com.ps.uservice.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,5 +17,6 @@ public class Session extends BaseModel{
     private Date expiringAt;
     @ManyToOne
     private User user;
+    @Enumerated(EnumType.ORDINAL)
     private SessionStatus status;
 }
