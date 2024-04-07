@@ -1,8 +1,8 @@
 package com.ps.uservice.controllers;
 
-import com.ps.uservice.dtos.LoginRequestDto;
-import com.ps.uservice.dtos.SignUpRequestDto;
-import com.ps.uservice.dtos.UserDto;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.ps.uservice.dtos.*;
+import com.ps.uservice.models.SessionStatus;
 import com.ps.uservice.services.AuthService;
 import com.ps.uservice.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -19,13 +19,25 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserDto> login(@RequestBody LoginRequestDto requestDto){
+    public ResponseEntity<UserDto> login(@RequestBody LoginRequestDto requestDto) throws JsonProcessingException {
         return this.authService.login(requestDto.getEmailId(), requestDto.getPassword());
     }
 
     @PostMapping("/signup")
     public ResponseEntity<UserDto> signUp(@RequestBody SignUpRequestDto requestDto){
-        UserDto userDto = this.authService.signUp(requestDto.getEmailId(), requestDto.getPassword());
+        UserDto userDto = this.authService.signUp(requestDto.getEmailId(), requestDto.getPassword(), requestDto.getName(), requestDto.getRoleTypes());
         return new ResponseEntity<>(userDto, HttpStatus.OK);
+    }
+
+    @PostMapping("/validate")
+    public ResponseEntity<SessionStatus> validate(@RequestBody ValidateTokenRequestDto requestDto){
+        SessionStatus sessionStatus = this.authService.validate(requestDto.getUserId(), requestDto.getToken());
+        return new ResponseEntity<>(sessionStatus, HttpStatus.OK);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(@RequestBody LogoutRequestDto requestDto){
+        this.authService.logout(requestDto.getUserId(), requestDto.getToken());
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 }
