@@ -2,6 +2,7 @@ package com.ps.uservice.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ps.uservice.dtos.*;
+import com.ps.uservice.models.Session;
 import com.ps.uservice.models.SessionStatus;
 import com.ps.uservice.services.AuthService;
 import com.ps.uservice.services.UserService;
@@ -30,9 +31,8 @@ public class AuthController {
     }
 
     @PostMapping("/validate")
-    public ResponseEntity<SessionStatus> validate(@RequestBody ValidateTokenRequestDto requestDto){
-        SessionStatus sessionStatus = this.authService.validate(requestDto.getUserId(), requestDto.getToken());
-        return new ResponseEntity<>(sessionStatus, HttpStatus.OK);
+    public ResponseEntity<ValidateTokenResponseDto> validate(@RequestBody ValidateTokenRequestDto requestDto){
+        return this.authService.validate(requestDto.getToken());
     }
 
     @PostMapping("/logout")

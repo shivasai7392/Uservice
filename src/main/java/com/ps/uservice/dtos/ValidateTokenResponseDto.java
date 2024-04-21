@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class ValidateTokenRequestDto {
-//    private UUID userId;
-    private String token;
+public class ValidateTokenResponseDto {
+    private UUID userId;
+    private String emailId;
 }

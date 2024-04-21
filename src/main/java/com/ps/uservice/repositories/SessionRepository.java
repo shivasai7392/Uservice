@@ -12,6 +12,8 @@ import java.util.UUID;
 
 @Repository
 public interface SessionRepository extends JpaRepository<Session, UUID> {
+    Optional<Session> findByUserIdAndTokenAndStatusAndExpiryingAtAfter(UUID userId, String token,SessionStatus sessionStatus, Date currentDate);
+
     Optional<Session> findByUserIdAndToken(UUID userId, String token);
 
     List<Session> findAllByUserIdAndStatusAndExpiryingAtAfter(UUID userId, SessionStatus sessionStatus, Date currentDate);
