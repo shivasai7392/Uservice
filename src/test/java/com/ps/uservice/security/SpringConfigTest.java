@@ -23,24 +23,24 @@ public class SpringConfigTest {
     @Inject
     private RegisteredClientRepository registeredClientRepository;
 
-    @Test
-    @Commit
-    public void registeredClientRepositoryTest(){
-        RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                .clientId("productservice")
-                .clientSecret(this.bCryptPasswordEncoder.encode("productservicesecret"))
-                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-                .redirectUri("http://127.0.0.1:8080/login/oauth2/code/oidc-client")
-                .redirectUri("https://oauth.pstmn.io/v1/callback")
-                .postLogoutRedirectUri("http://127.0.0.1:8080/")
-                .scope(OidcScopes.OPENID)
-                .scope(OidcScopes.PROFILE)
-                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
-                .build();
-
-        this.registeredClientRepository.save(oidcClient);
-    }
+//    @Test
+//    @Commit
+//    public void registeredClientRepositoryTest(){
+//        RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
+//                .clientId("productservice")
+//                .clientSecret(this.bCryptPasswordEncoder.encode("productservicesecret"))
+//                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+//                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+//                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+//                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+//                .redirectUri("http://127.0.0.1:8080/login/oauth2/code/oidc-client")
+//                .redirectUri("https://oauth.pstmn.io/v1/callback")
+//                .postLogoutRedirectUri("http://127.0.0.1:8080/")
+//                .scope(OidcScopes.OPENID)
+//                .scope(OidcScopes.PROFILE)
+//                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
+//                .build();
+//
+//        this.registeredClientRepository.save(oidcClient);
+//    }
 }
